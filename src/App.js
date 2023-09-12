@@ -23,7 +23,13 @@ function App() {
   }
 
   function increaseAge() {
-    setUserData({...userData, age: userData.age + 1});
+    setUserData((prevUserData) => {
+      return { ...prevUserData, age: prevUserData.age + 1 };
+    });
+  
+    setUserData((prevUserData) => {
+      return { ...prevUserData, age: prevUserData.age + 1};
+    });
   }
 
   function decreaseAge() {
