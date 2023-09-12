@@ -6,9 +6,8 @@ function App() {
   const [numbers, setState] = useState([1, 2, 3]);
 
   // 2 задание
-  const [name, setName] = useState("Алексей");
+  const [userData, setUserData] = useState({name: "Алексей", age: 19});
   const [nameInput, setNameInput] = useState("");
-  const [age, setAge] = useState(19);
 
   // 3 задание
   const [liked, setLiked] = useState(false);
@@ -20,15 +19,15 @@ function App() {
 
   // 2 задание
   function changeName() {
-    setName(nameInput);
+    setUserData({...userData, name: nameInput});
   }
 
   function increaseAge() {
-    setAge(age + 1);
+    setUserData({...userData, age: userData.age + 1});
   }
 
   function decreaseAge() {
-    setAge(age - 1);
+    setUserData({...userData, age: userData.age - 1});
   }
 
   // 3 задание
@@ -47,6 +46,7 @@ function App() {
         </ul>
         <button onClick={addNumber}>New number</button>
       </div>
+      <br></br>
 
       {/* 2 задание */}
       <div>
@@ -62,14 +62,15 @@ function App() {
           }}
         />
 
-        <h1> {name} </h1>
-        <h1> {age} </h1>
+        <h1> {userData.name} </h1>
+        <h1> {userData.age} </h1>
 
         <button onClick={increaseAge}> Increase </button>
         <button onClick={decreaseAge}> Decrease </button>
       </div>
 
       {/* 3 задание */}
+      <br></br>
       <div>
         <label>
           <input type="checkbox" onChange={toggleLike}></input>
