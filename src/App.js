@@ -87,7 +87,7 @@ function App() {
 
             {/* Пример использования компонента Product */}
             {sortedProducts.map((product) => (
-                <Product key={product.id} {...product} />
+                <Product id={product.id} name={product.name} description={product.description} price={product.price} />
             ))}
 
             {/* Пример использования компонента Counter */}

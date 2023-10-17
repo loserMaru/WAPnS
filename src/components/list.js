@@ -11,8 +11,8 @@ function List(props) {
     const sortedList = filteredList.sort((a, b) => {
         if (sortCriteria === 'name') {
             return a.name.localeCompare(b.name);
-        } else if (sortCriteria === 'age') {
-            return a.age - b.age;
+        } else {
+            return b.age - a.age;
         }
 
     });
