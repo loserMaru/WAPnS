@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
 
-function Product(props) {
-  const { name, price, description } = props;
-
-  return (
-    <div>
-      <h2>{name}</h2>
-      <p>Цена: {price} руб.</p>
-      <p>{description}</p>
-    </div>
-  );
+function sortProductsByPrice(products) {
+    return [...products].sort((a, b) => a.price - b.price);
 }
 
-export default Product;
+function sortProductsByName(products) {
+    return [...products].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function Product({id, name, price, description}) {
+    return (
+        <div className="product">
+            <h1>ID: {id}</h1>
+            <h2>{name}</h2>
+            <p>Цена: {price} руб.</p>
+            <p>Описание: {description}</p>
+        </div>
+    );
+}
+
+export {Product, sortProductsByPrice, sortProductsByName};
