@@ -1,97 +1,90 @@
-import React, { useState } from "react";
-import User from "./components/user";
-import List from "./components/list";
-import Person from "./components/person";
-import { Product, sortProductsByName, sortProductsByPrice } from "./components/product";
-import Counter from "./components/counter";
+import React, {useState} from 'react';
+import ImageContainer from './components/imageContainer';
+import CustomizableImage from './components/customizableImage';
+import ControlledTextarea from "./components/controlledTextarea";
+import UncontrolledTextarea from "./components/uncontrolledTextarea";
+import GuestGreeting from "./components/guestGreeting";
+import UserGreeting from "./components/userGreeting";
+import ShapeList from "./components/shapeList";
+import AddShapeForm from "./components/addShapeForm";
 
 function App() {
-    // Данные для компонентов
-    const userData = {
-        name: "Иван Иванов",
-        age: 20,
+    // Задание 1
+    const imageStyles = {
+        width: '800px',
+        height: '400px',
     };
 
-    const itemList = [
-        { name: "Андрей", age: 21 },
-        { name: "Степан", age: 55 },
-        { name: "Игорь", age: 30 },
-        { name: "Артем", age: 5 },
-    ];
+    // Задание 3
+    const [username, setUsername] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const personData = {
-        name: "Иван Иванов",
-        age: 30,
-        email: "ivan@example.com",
+    const handleLogin = () => {
+        if (username) {
+            setIsLoggedIn(true);
+        }
     };
 
-    const productData = [
-        {
-            id: "1",
-            name: "Апельсин",
-            price: 80,
-            description: "Оранжевый апельсин",
-        },
-        {
-            id: "2",
-            name: "Помидор",
-            price: 20,
-            description: "Красный помидор",
-        },
-        {
-            id: "3",
-            name: "Банан",
-            price: 50,
-            description: "Желтый банан",
-        },
-    ];
-
-    // Состояние для списка продуктов
-    const [sortedProducts, setSortedProducts] = useState(productData);
-
-    // Функция для сортировки по цене
-    const handleSortByPrice = () => {
-        const sortedByPrice = sortProductsByPrice([...sortedProducts]);
-        setSortedProducts(sortedByPrice);
+    const handleLogout = () => {
+        setUsername('');
+        setIsLoggedIn(false)
     };
 
-    // Функция для сортировки по названию
-    const handleSortByName = () => {
-        const sortedByName = sortProductsByName([...sortedProducts]);
-        setSortedProducts(sortedByName);
+    // Задание 4
+    const [shapes, setShapes] = useState([]);
+
+    const addShape = (shapeType) => {
+        setShapes([...shapes, shapeType]);
     };
 
-    // Состояние счетчика
-    const [counter, setCounter] = React.useState(0);
-
-    const handleCounterIncrement = () => {
-        setCounter(counter + 1);
+    const removeShape = (index) => {
+        const newShapes = [...shapes];
+        newShapes.splice(index, 1);
+        setShapes(newShapes);
     };
 
     return (
-        <div className="App">
-            <h1>Примеры компонентов React</h1>
+        <div>
+            <h1>Задание 1</h1>
+            <ImageContainer>
+                <CustomizableImage
+                    src="https://w.forfun.com/fetch/ef/ef1452df71a254915caa2d55ef5260a7.jpeg"
+                    alt="Customizable Image"
+                    style={imageStyles}
+                />
+            </ImageContainer>
 
-            {/* Пример использования компонента User */}
-            <User name={userData.name} age={userData.age} />
+            <h1>Задание 2</h1>
+            <div>
+                <h2>Управляемый компонент:</h2>
+                <ControlledTextarea/>
+                <h2>Неуправляемый компонент:</h2>
+                <UncontrolledTextarea/>
+            </div>
 
-            {/* Пример использования компонента List */}
-            <List items={itemList} />
+            <h1>Задание 3</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Введите ваше имя"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <button onClick={handleLogin}>Войти</button>
+                {isLoggedIn ? (
+                    <UserGreeting username={username} onLogout={handleLogout}/>
+                ) : (
+                    <GuestGreeting/>
+                )}
+            </div>
 
-            {/* Пример использования компонента Person */}
-            <Person {...personData} />
-
-            {/* Кнопки для сортировки продуктов */}
-            <button onClick={handleSortByPrice}>Сортировать по цене</button>
-            <button onClick={handleSortByName}>Сортировать по названию</button>
-
-            {/* Пример использования компонента Product */}
-            {sortedProducts.map((product) => (
-                <Product id={product.id} name={product.name} description={product.description} price={product.price} />
-            ))}
-
-            {/* Пример использования компонента Counter */}
-            <Counter count={counter} onIncrement={handleCounterIncrement} />
+            <h1>Задание 4</h1>
+            <div>
+                <h2>Список фигур:</h2>
+                <ShapeList shapes={shapes} onRemoveShape={removeShape}/>
+                <h2>Добавить новую фигуру:</h2>
+                <AddShapeForm onAddShape={addShape}/>
+            </div>
         </div>
     );
 }
