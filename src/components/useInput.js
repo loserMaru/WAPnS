@@ -8,8 +8,12 @@ const useInput = (initial, required) => {
         error,
         onChange: e => setValue(e.target.value),
         onBlur: e => {
-            if (!e.target.value && required) setError("Required field")
-            else setError(null)
+            if (!e.target.value && required) {
+                setError("Required field")
+            }
+            else {
+                setError(null)
+            }
         }
     }
 }
