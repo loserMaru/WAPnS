@@ -32,7 +32,7 @@ const ShapeList = ({ shapes, onRemoveShape }) => {
             </ul>
 
             {shapeIndexToRemove !== null && (
-                <Modal isOpen={true} onClose={closeModal} onConfirm={confirmRemoveShape}>
+                <Modal onClose={closeModal} onConfirm={confirmRemoveShape}>
                     <p>Вы действительно хотите удалить фигуру?</p>
                     <button onClick={confirmRemoveShape}>Да</button>
                     <button onClick={closeModal}>Отмена</button>
