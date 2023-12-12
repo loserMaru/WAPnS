@@ -14,4 +14,4 @@ const IsFive = ({value}) => {
     return <h3>{getResult}</h3>;
 };
 
-export default IsFive;
+export default React.memo(IsFive);

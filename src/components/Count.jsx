@@ -6,7 +6,6 @@ const render = {
 };
 
 const Count = ({id, value}) => {
-    console.log('asdfsadf')
     console.warn(`🔴 Count${id} render: ${++render[`count${id}`]}`);
 
     return (
