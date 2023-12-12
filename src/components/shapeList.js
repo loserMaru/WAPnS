@@ -16,7 +16,6 @@ const ShapeList = ({ shapes, onRemoveShape }) => {
     const confirmRemoveShape = () => {
         if (shapeIndexToRemove !== null) {
             onRemoveShape(shapeIndexToRemove);
-            setShapeIndexToRemove(null);
         }
         closeModal();
     };
