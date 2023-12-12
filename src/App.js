@@ -1,22 +1,26 @@
-import React from 'react';
-import useInput from './components/useInput'; // Импортируйте кастомный хук
+import React, { useState } from 'react';
+import Modal from './Modal';
+import './App.css'
 
 const App = () => {
-    const nameInput = useInput('', true); // Поле обязательно для заполнения
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const openModal = () => {
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+    };
 
     return (
         <div>
-            <label>
-                <input
-                    type="text"
-                    value={nameInput.value}
-                    onChange={nameInput.onChange}
-                    onBlur={nameInput.onBlur}
-                />
-                <div>
-                    {nameInput.error && <span>{nameInput.error}</span>}
-                </div>
-            </label>
+            <button onClick={openModal}>Открыть модальное окно</button>
+
+            <Modal show={modalVisible} onClose={closeModal}>
+                <h1>Привет, это модальное окно!</h1>
+                <button onClick={closeModal}>Закрыть</button>
+            </Modal>
         </div>
     );
 };
