@@ -1,92 +1,28 @@
-import React, {useState} from 'react';
-import ImageContainer from './components/imageContainer';
-import CustomizableImage from './components/customizableImage';
-import ControlledTextarea from "./components/controlledTextarea";
-import UncontrolledTextarea from "./components/uncontrolledTextarea";
-import GuestGreeting from "./components/guestGreeting";
-import UserGreeting from "./components/userGreeting";
-import ShapeList from "./components/shapeList";
-import AddShapeForm from "./components/addShapeForm";
+import React from 'react';
+import Count from './components/Count';
+import IsFive from './components/IsFive';
 
 function App() {
-    // Задание 1
-    const imageStyles = {
-        width: '800px',
-        height: '400px',
-    };
+  const [count1, setCount1] = React.useState(0);
+  const [count2, setCount2] = React.useState(0);
 
-    // Задание 3
-    const [username, setUsername] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  return (
+    <div className="App">
 
-    const handleLogin = () => {
-        if (username) {
-            setIsLoggedIn(true);
-        }
-    };
+      <h5>Счетчик 1: </h5>
+      <div className="counter">
+        <button onClick={() => setCount1(count1 + 1)}>+</button>
+        <Count id={1} value={count1} />
+      </div>
 
-    const handleLogout = () => {
-        setUsername('');
-        setIsLoggedIn(false)
-    };
-
-    // Задание 4
-    const [shapes, setShapes] = useState([]);
-
-    const addShape = (shapeType) => {
-        setShapes([...shapes, shapeType]);
-    };
-
-    const removeShape = (index) => {
-        const newShapes = [...shapes];
-        newShapes.splice(index, 1);
-        setShapes(newShapes);
-    };
-
-    return (
-        <div>
-            <h1>Задание 1</h1>
-            <ImageContainer>
-                <CustomizableImage
-                    src="https://w.forfun.com/fetch/ef/ef1452df71a254915caa2d55ef5260a7.jpeg"
-                    alt="Customizable Image"
-                    style={imageStyles}
-                />
-            </ImageContainer>
-
-            <h1>Задание 2</h1>
-            <div>
-                <h2>Управляемый компонент:</h2>
-                <ControlledTextarea/>
-                <h2>Неуправляемый компонент:</h2>
-                <UncontrolledTextarea/>
-            </div>
-
-            <h1>Задание 3</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Введите ваше имя"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <button onClick={handleLogin}>Войти</button>
-                {isLoggedIn ? (
-                    <UserGreeting username={username} onLogout={handleLogout}/>
-                ) : (
-                    <GuestGreeting/>
-                )}
-            </div>
-
-            <h1>Задание 4</h1>
-            <div>
-                <h2>Список фигур:</h2>
-                <ShapeList shapes={shapes} onRemoveShape={removeShape}/>
-                <h2>Добавить новую фигуру:</h2>
-                <AddShapeForm onAddShape={addShape}/>
-            </div>
-        </div>
-    );
+      <h5>Счетчик 2: </h5>
+      <div className="counter">
+        <button onClick={() => setCount2(count2 + 1)}>+</button>
+        <Count id={2} value={count2} />
+        <IsFive value={count2} />
+      </div>
+    </div>
+  );
 }
 
 export default App;
