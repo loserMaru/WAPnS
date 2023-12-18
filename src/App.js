@@ -1,10 +1,10 @@
 import React from 'react';
-import Albums from './components/Albums';
+import Posts from './components/Posts';
 
 function App() {
     return (
         <div className="app">
-            <Albums />
+            <Posts />
         </div>
     );
 }
