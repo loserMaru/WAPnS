@@ -1,32 +1,18 @@
-// App.js
-import React, { useState } from 'react';
-import ShapeList from './components/shapeList'; // убедитесь, что имя файла и компонента правильное
-import AddShapeForm from './components/addShapeForm';
+import { books } from "./data";
+import { Books } from "./components/Books";
+
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
-    const [shapes, setShapes] = useState([]);
+  const [order, setOrder] = useLocalStorage([], "order");
 
-    const addShape = (shapeType) => {
-        setShapes([...shapes, shapeType]);
-    };
+  const addToOrder = (id) => {
+    const newItem = books.find((item) => item.id === id);
 
-    const removeShape = (index) => {
-        const newShapes = [...shapes];
-        newShapes.splice(index, 1);
-        setShapes(newShapes);
-    };
+    setOrder([...order, newItem]);
+  };
 
-    return (
-        <div>
-            <h1>Задание 4</h1>
-            <div>
-                <h2>Список фигур:</h2>
-                <ShapeList shapes={shapes} onRemoveShape={removeShape} />
-                <h2>Добавить новую фигуру:</h2>
-                <AddShapeForm onAddShape={addShape} />
-            </div>
-        </div>
-    );
+  return <Books items={books} addToOrder={addToOrder} />;
 }
 
 export default App;
