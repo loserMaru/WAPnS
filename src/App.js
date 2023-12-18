@@ -1,18 +1,12 @@
-import { books } from "./data";
-import { Books } from "./components/Books";
-
-import { useLocalStorage } from './hooks/useLocalStorage';
+import React from "react";
+import Timer from "./components/Timer";
 
 function App() {
-  const [order, setOrder] = useLocalStorage([], "order");
-
-  const addToOrder = (id) => {
-    const newItem = books.find((item) => item.id === id);
-
-    setOrder([...order, newItem]);
-  };
-
-  return <Books items={books} addToOrder={addToOrder} />;
+    return (
+        <div className="app">
+            <Timer/>
+        </div>
+    );
 }
 
 export default App;
