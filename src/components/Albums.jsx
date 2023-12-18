@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Albums() {
@@ -21,20 +21,20 @@ function Albums() {
             {albums.map((album) => (
                 <div key={album.id}>
                     <h2>{album.title}</h2>
-                    <AlbumPhotos albumId={album.id}/>
+                    <AlbumPhotos albumId={album.id} />
                 </div>
             ))}
         </div>
     );
 }
 
-function AlbumPhotos({albumId}) {
+function AlbumPhotos({ albumId }) {
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
             .then((response) => {
-                setPhotos(response.data.slice(0, 3));
+                setPhotos(response.data.slice(0, 2));
             })
             .catch((error) => {
                 console.error('Ошибка при загрузке данных:', error);
@@ -47,7 +47,7 @@ function AlbumPhotos({albumId}) {
             <ul>
                 {photos.map((photo) => (
                     <li key={photo.id}>
-                        <img src={photo.thumbnailUrl} alt={photo.title}/>
+                        <img src={photo.thumbnailUrl} alt={photo.title} />
                     </li>
                 ))}
             </ul>

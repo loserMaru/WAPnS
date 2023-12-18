@@ -27,9 +27,9 @@ function Post({ post }) {
         async function fetchData() {
             const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
             setComments(response.data);
-        }
+            }
         fetchData().then();
-    }, [post.id]);
+        }, [post.id]);
     const handleCommentSubmit = async () => {
         try {
             const response = await axios.post('https://jsonplaceholder.typicode.com/comments', {
